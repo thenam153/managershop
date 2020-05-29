@@ -31,4 +31,31 @@ public class CategoryDAO extends AbstractDAO<CategoryModel> implements ICategory
 		return categoryModels.isEmpty() ? null : categoryModels.get(0);
 	}
 
+	@Override
+	public int save(CategoryModel categoryModel) {
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder("INSERT INTO news (title, content,");
+		sql.append(" thumbnail, shortdescription, categoryid, createddate, createdby)");
+		sql.append(" VALUES(?, ?, ?, ?, ?, ?, ?)");
+		return 0;
+	}
+
+	@Override
+	public int update(CategoryModel categoryModel) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTotalItem() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
