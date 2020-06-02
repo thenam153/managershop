@@ -20,7 +20,7 @@ public class TransactionsDAO extends AbstractDAO<TransactionsModel> implements I
 	@Override
 	public TransactionsModel findByCustomer(Integer id) {
 		// TODO Auto-generated method stub
-		String sql = "select * from transactions where id = ?";
+		String sql = "select * from transactions where idCustomer = ?";
 		List<TransactionsModel> transactionsModels = query(sql, new TransactionsMapper(), id);
 		return transactionsModels.isEmpty() ? null : transactionsModels.get(0);
 	}
@@ -28,7 +28,7 @@ public class TransactionsDAO extends AbstractDAO<TransactionsModel> implements I
 	@Override
 	public TransactionsModel findByEmployee(Integer id) {
 		// TODO Auto-generated method stub
-		String sql = "select * from transactions where name = ?";
+		String sql = "select * from transactions where idEmployee = ?";
 		List<TransactionsModel> transactionsModels = query(sql, new TransactionsMapper(), id);
 		return transactionsModels.isEmpty() ? null : transactionsModels.get(0);
 

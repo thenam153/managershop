@@ -1,6 +1,6 @@
 package app;
 
-import static spark.Spark.get;
+import static spark.Spark.*;
 import static spark.Spark.port;
 import static spark.Spark.staticFiles;
 
@@ -13,11 +13,18 @@ import javax.inject.Inject;
 
 import com.google.gson.Gson;
 
-import app.controller.UserController;
+import app.controller.AuthenticateController;
+import app.controller.Controller;
+import app.controller.CustomerController;
+import app.controller.EmployeeController;
+import app.controller.ProductController;
+import app.controller.ProviderController;
+import app.controller.TransactionController;
 import app.dao.impl.CustomersDAO;
 import app.model.CategoryModel;
 import app.service.impl.CategoryService;
 import app.utils.ViewUtil;
+import spark.Session;
 
 public class Application {
 	@Inject
@@ -29,10 +36,16 @@ public class Application {
 		port(1503);
 		staticFiles.location("/public");
 		staticFiles.expireTime(600L);
-		new UserController();
+		new AuthenticateController();
+//		new Controller();
+		new CustomerController();
+		new EmployeeController();
+		new ProductController();
+		new ProviderController();
+		new TransactionController();
+		
+		// dirty 
 		get("/book", (req, res) -> {
-//        	return new Gson().toJson(new StandardResponse("SUCCESS", new Gson().toJsonTree(new Book("Moby Dick", "Herman Melville", "9789583001215"))));
-//			return new Gson().toJson(new Book());
 			Map<String, Object> model = new HashMap<>();
 	        model.put("users", "data");
 	        model.put("book", "dádđ");

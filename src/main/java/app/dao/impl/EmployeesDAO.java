@@ -78,5 +78,14 @@ public class EmployeesDAO extends AbstractDAO<EmployeesModel> implements IEmploy
 		String sql = "SELECT count(*) FROM employees";
 		return count(sql);
 	}
+
+	@Override
+	public EmployeesModel findByUserName(String name) {
+		// TODO Auto-generated method stub
+		String sql = "select * from employees where username = ?";
+		List<EmployeesModel> employeesModels = query(sql, new EmployeesMapper(), name);
+		System.out.println(employeesModels);
+		return employeesModels.isEmpty() ? null : employeesModels.get(0);
+	}
 	
 }

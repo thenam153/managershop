@@ -53,6 +53,9 @@ public class EmployeesModel extends AbstactModel<EmployeesModel>{
 		this.password = password;
 	}
 	public Integer getLevel() {
+		if(level == null) {
+			return 0;
+		}
 		return level;
 	}
 	public void setLevel(Integer level) {

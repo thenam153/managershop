@@ -5,7 +5,9 @@ import java.util.List;
 import app.dao.ITransactionsDetailsDAO;
 import app.mapper.CustomersMapper;
 import app.mapper.TransactionDetailsMapper;
+import app.mapper.TransactionsMapper;
 import app.model.TransactionsDetailsModel;
+import app.model.TransactionsModel;
 
 public class TransactionsDetailsDAO extends AbstractDAO<TransactionsDetailsModel> implements ITransactionsDetailsDAO{
 
@@ -18,13 +20,17 @@ public class TransactionsDetailsDAO extends AbstractDAO<TransactionsDetailsModel
 	@Override
 	public TransactionsDetailsModel findByTransaction(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from transactionsdetails where idTransaction = ?";
+		List<TransactionsDetailsModel> transactionsDetailsModels = query(sql, new TransactionDetailsMapper(), id);
+		return transactionsDetailsModels.isEmpty() ? null : transactionsDetailsModels.get(0);
 	}
 
 	@Override
 	public TransactionsDetailsModel findByProduct(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from transactionsdetails where idProduct = ?";
+		List<TransactionsDetailsModel> transactionsDetailsModels = query(sql, new TransactionDetailsMapper(), id);
+		return transactionsDetailsModels.isEmpty() ? null : transactionsDetailsModels.get(0);
 	}
 
 	@Override

@@ -44,7 +44,6 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 			setParameter(statement, parameters);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				System.out.println(resultSet.getInt(1));
 				results.add(rowMapper.mapRow(resultSet));
 			}
 			return results;
