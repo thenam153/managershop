@@ -16,15 +16,20 @@ import app.mapper.RowMapper;
 
 public class AbstractDAO<T> implements GenericDAO<T> {
 	
-//	ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
+	ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
 	
 	public Connection getConnection() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/managershop";
-			String user = "root";
-			String password = "";
-			System.out.println("run get connection");
+			Class.forName(resourceBundle.getString("driverName"));
+//			Class.forName("com.mysql.jdbc.Driver");
+//			String url = "jdbc:mysql://localhost:3306/managershop";
+//			String user = "root";
+//			String password = "";
+			String url = resourceBundle.getString("url");
+			String user = resourceBundle.getString("user");
+			String password = resourceBundle.getString("password");
+			
+			System.out.println("Connecting to database");
 			return DriverManager.getConnection(url, user, password);
 		} catch (ClassNotFoundException | SQLException e) {
 			System.out.println("exeption");
@@ -126,7 +131,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			int id = (Integer) null;
+			int id = 0;
 			connection = getConnection();
 			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

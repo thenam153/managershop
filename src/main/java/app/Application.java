@@ -14,50 +14,53 @@ import javax.inject.Inject;
 import com.google.gson.Gson;
 
 import app.controller.AuthenticateController;
-import app.controller.Controller;
 import app.controller.CustomerController;
 import app.controller.EmployeeController;
 import app.controller.ProductController;
 import app.controller.ProviderController;
 import app.controller.TransactionController;
-import app.dao.impl.CustomersDAO;
-import app.model.CategoryModel;
-import app.service.impl.CategoryService;
+import app.controller.TransactionsDetailController;
+import app.dao.impl.CustomerDAO;
 import app.utils.ViewUtil;
 import spark.Session;
 
+import spark.Filter;
+import spark.Request;
+import spark.Response;
+
+
 public class Application {
-	@Inject
-    private static CategoryService categoryService = new CategoryService();
-	private static List<CategoryModel> categoryModel = new ArrayList<CategoryModel>();
-	private static CustomersDAO customersDAO = new CustomersDAO();
 	
 	public static void main(String[] args) {
 		port(1503);
 		staticFiles.location("/public");
 		staticFiles.expireTime(600L);
+		options("/*",
+		        (request, response) -> {
+
+		            String accessControlRequestHeaders = request
+		                    .headers("Access-Control-Request-Headers");
+		            if (accessControlRequestHeaders != null) {
+		                response.header("Access-Control-Allow-Headers",
+		                        accessControlRequestHeaders);
+		            }
+
+		            String accessControlRequestMethod = request
+		                    .headers("Access-Control-Request-Method");
+		            if (accessControlRequestMethod != null) {
+		                response.header("Access-Control-Allow-Methods",
+		                        accessControlRequestMethod);
+		            }
+
+		            return "OK";
+		        });		
+		before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 		new AuthenticateController();
-//		new Controller();
 		new CustomerController();
 		new EmployeeController();
 		new ProductController();
 		new ProviderController();
 		new TransactionController();
-		
-		// dirty 
-		get("/book", (req, res) -> {
-			Map<String, Object> model = new HashMap<>();
-	        model.put("users", "data");
-	        model.put("book", "dádđ");
-			return ViewUtil.render(req, model, "/template/index.html");
-        });
-		get("/bokok", (req, res) -> {
-			return new Gson().toJson(customersDAO.findAll());
-		});
-		get("/book123", (req, res) -> {
-			Map<String, Object> model = new HashMap<>();
-			return ViewUtil.render(req, model, "/template/dist/index.html");
-        });
-		
+		new TransactionsDetailController();
 	}
 }

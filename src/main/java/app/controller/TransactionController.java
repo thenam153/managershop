@@ -7,12 +7,13 @@ import com.google.gson.GsonBuilder;
 
 import static spark.Spark.*;
 
-import app.dao.impl.CustomersDAO;
-import app.dao.impl.EmployeesDAO;
-import app.dao.impl.TransactionsDAO;
-import app.mapper.CustomersMapper;
-import app.model.CustomersModel;
-import app.model.EmployeesModel;
+import app.dao.impl.CustomerDAO;
+import app.dao.impl.EmployeeDAO;
+import app.dao.impl.TransactionDAO;
+import app.mapper.CustomerMapper;
+import app.model.CustomerModel;
+import app.model.EmployeeModel;
+import app.model.TransactionModel;
 import app.utils.ViewUtil;
 import spark.Request;
 import spark.Response;
@@ -20,20 +21,11 @@ import spark.Route;
 public class TransactionController {
 	public TransactionController() {
 		// TODO Auto-generated constructor stub
-		get("/giao-dich", new Route() {
-			
-			@Override
-			public Object handle(Request request, Response response) throws Exception {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		});
-		
 		post("/get/giao-dich", new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				TransactionsDAO transactionsDAO = new TransactionsDAO();
+				TransactionDAO transactionsDAO = new TransactionDAO();
 				return new Gson().toJson(transactionsDAO.findAll());
 			}
 		});
@@ -41,30 +33,11 @@ public class TransactionController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				CustomersModel customersModel = new GsonBuilder().create().fromJson(request.body(), CustomersModel.class);
-				int id = new CustomersDAO().save(customersModel);
-				customersModel.setId(id);
-				return new Gson().toJson(customersModel);
+				TransactionModel transactionsModel = new GsonBuilder().create().fromJson(request.body(), TransactionModel.class);
+				int id = new TransactionDAO().save(transactionsModel);
+				transactionsModel.setId(id);
+				return new Gson().toJson(transactionsModel);
 			}
 		});
-		
-//		post("/edit/giao-dich", new Route() {
-//			
-//			@Override
-//			public Object handle(Request request, Response response) throws Exception {
-//				CustomersModel customersModel = new GsonBuilder().create().fromJson(request.body(), CustomersModel.class);
-//				new CustomersDAO().update(customersModel);
-//				return new Gson().toJson(customersModel);
-//			}
-//		});
-//		post("/delete/giao-dich", new Route() {
-//			
-//			@Override
-//			public Object handle(Request request, Response response) throws Exception {
-//				CustomersModel customersModel = new GsonBuilder().create().fromJson(request.body(), CustomersModel.class);
-//				new CustomersDAO().delete(customersModel.getId());
-//				return new Gson().toJson(customersModel.getId());
-//			}
-//		});
 	}
 }

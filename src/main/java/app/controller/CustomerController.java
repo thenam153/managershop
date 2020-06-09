@@ -7,11 +7,11 @@ import com.google.gson.GsonBuilder;
 
 import static spark.Spark.*;
 
-import app.dao.impl.CustomersDAO;
-import app.dao.impl.EmployeesDAO;
-import app.mapper.CustomersMapper;
-import app.model.CustomersModel;
-import app.model.EmployeesModel;
+import app.dao.impl.CustomerDAO;
+import app.dao.impl.EmployeeDAO;
+import app.mapper.CustomerMapper;
+import app.model.CustomerModel;
+import app.model.EmployeeModel;
 import app.utils.ViewUtil;
 import spark.Request;
 import spark.Response;
@@ -19,20 +19,11 @@ import spark.Route;
 public class CustomerController {
 	public CustomerController() {
 		// TODO Auto-generated constructor stub
-		get("/khach-hang", new Route() {
-			
-			@Override
-			public Object handle(Request request, Response response) throws Exception {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		});
-		
 		post("/get/khach-hang", new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				CustomersDAO customersDAO = new CustomersDAO();
+				CustomerDAO customersDAO = new CustomerDAO();
 				return new Gson().toJson(customersDAO.findAll());
 			}
 		});
@@ -40,8 +31,9 @@ public class CustomerController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				CustomersModel customersModel = new GsonBuilder().create().fromJson(request.body(), CustomersModel.class);
-				int id = new CustomersDAO().save(customersModel);
+				
+				CustomerModel customersModel = new GsonBuilder().create().fromJson(request.body(), CustomerModel.class);
+				int id = new CustomerDAO().save(customersModel);
 				customersModel.setId(id);
 				return new Gson().toJson(customersModel);
 			}
@@ -50,8 +42,8 @@ public class CustomerController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				CustomersModel customersModel = new GsonBuilder().create().fromJson(request.body(), CustomersModel.class);
-				new CustomersDAO().update(customersModel);
+				CustomerModel customersModel = new GsonBuilder().create().fromJson(request.body(), CustomerModel.class);
+				new CustomerDAO().update(customersModel);
 				return new Gson().toJson(customersModel);
 			}
 		});
@@ -59,8 +51,8 @@ public class CustomerController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				CustomersModel customersModel = new GsonBuilder().create().fromJson(request.body(), CustomersModel.class);
-				new CustomersDAO().delete(customersModel.getId());
+				CustomerModel customersModel = new GsonBuilder().create().fromJson(request.body(), CustomerModel.class);
+				new CustomerDAO().delete(customersModel.getId());
 				return new Gson().toJson(customersModel.getId());
 			}
 		});

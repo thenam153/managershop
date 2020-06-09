@@ -7,14 +7,14 @@ import com.google.gson.GsonBuilder;
 
 import static spark.Spark.*;
 
-import app.dao.impl.CustomersDAO;
-import app.dao.impl.EmployeesDAO;
-import app.dao.impl.ProductsDAO;
-import app.mapper.CustomersMapper;
-import app.model.CustomersModel;
-import app.model.EmployeesModel;
-import app.model.ProductsModel;
-import app.model.ProvidersModel;
+import app.dao.impl.CustomerDAO;
+import app.dao.impl.EmployeeDAO;
+import app.dao.impl.ProductDAO;
+import app.mapper.CustomerMapper;
+import app.model.CustomerModel;
+import app.model.EmployeeModel;
+import app.model.ProductModel;
+import app.model.ProviderModel;
 import app.utils.ViewUtil;
 import spark.Request;
 import spark.Response;
@@ -22,20 +22,11 @@ import spark.Route;
 public class ProductController {
 	public ProductController() {
 		// TODO Auto-generated constructor stub
-		get("/san-pham", new Route() {
-			
-			@Override
-			public Object handle(Request request, Response response) throws Exception {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		});
-		
 		post("/get/san-pham", new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				ProductsDAO productsDAO = new ProductsDAO();
+				ProductDAO productsDAO = new ProductDAO();
 				return new Gson().toJson(productsDAO.findAll());
 			}
 		});
@@ -43,8 +34,8 @@ public class ProductController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				ProductsModel productsModel = new GsonBuilder().create().fromJson(request.body(), ProductsModel.class);
-				int id = new ProductsDAO().save(productsModel);
+				ProductModel productsModel = new GsonBuilder().create().fromJson(request.body(), ProductModel.class);
+				int id = new ProductDAO().save(productsModel);
 				productsModel.setId(id);
 				return new Gson().toJson(productsModel);
 			}
@@ -53,8 +44,8 @@ public class ProductController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				ProductsModel productsModel = new GsonBuilder().create().fromJson(request.body(), ProductsModel.class);
-				new ProductsDAO().update(productsModel);
+				ProductModel productsModel = new GsonBuilder().create().fromJson(request.body(), ProductModel.class);
+				new ProductDAO().update(productsModel);
 				return new Gson().toJson(productsModel);
 			}
 		});
@@ -62,8 +53,8 @@ public class ProductController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				ProductsModel productsModel = new GsonBuilder().create().fromJson(request.body(), ProductsModel.class);
-				new ProductsDAO().delete(productsModel.getId());
+				ProductModel productsModel = new GsonBuilder().create().fromJson(request.body(), ProductModel.class);
+				new ProductDAO().delete(productsModel.getId());
 				return new Gson().toJson(productsModel.getId());
 			}
 		});

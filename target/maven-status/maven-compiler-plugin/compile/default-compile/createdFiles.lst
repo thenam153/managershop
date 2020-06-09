@@ -1,13 +1,6 @@
-app\service\impl\CategoryService.class
 app\mapper\RowMapper.class
-app\dao\impl\CategoryDAO.class
-app\service\ICategoryService.class
+app\dao\GenericDAO.class
+app\dao\impl\AbstractDAO.class
 app\Application.class
 app\model\AbstactModel.class
-app\mapper\CategoryMapper.class
-app\dao\ICategoryDAO.class
-app\model\CategoryModel.class
-app\dao\GenericDAO.class
-app\StandardResponse.class
-app\dao\impl\AbstractDAO.class
 app\utils\ViewUtil.class

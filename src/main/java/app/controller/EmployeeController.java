@@ -7,11 +7,11 @@ import com.google.gson.GsonBuilder;
 
 import static spark.Spark.*;
 
-import app.dao.impl.CustomersDAO;
-import app.dao.impl.EmployeesDAO;
-import app.mapper.CustomersMapper;
-import app.model.CustomersModel;
-import app.model.EmployeesModel;
+import app.dao.impl.CustomerDAO;
+import app.dao.impl.EmployeeDAO;
+import app.mapper.CustomerMapper;
+import app.model.CustomerModel;
+import app.model.EmployeeModel;
 import app.utils.ViewUtil;
 import spark.Request;
 import spark.Response;
@@ -19,20 +19,11 @@ import spark.Route;
 public class EmployeeController {
 	public EmployeeController() {
 		// TODO Auto-generated constructor stub
-		get("/nhan-vien", new Route() {
-			
-			@Override
-			public Object handle(Request request, Response response) throws Exception {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		});
-		
 		post("/get/nhan-vien", new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				EmployeesDAO employeesDAO = new EmployeesDAO();
+				EmployeeDAO employeesDAO = new EmployeeDAO();
 				return new Gson().toJson(employeesDAO.findAll());
 			}
 		});
@@ -40,8 +31,8 @@ public class EmployeeController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				EmployeesModel employeesModel = new GsonBuilder().create().fromJson(request.body(), EmployeesModel.class);
-				int id = new EmployeesDAO().save(employeesModel);
+				EmployeeModel employeesModel = new GsonBuilder().create().fromJson(request.body(), EmployeeModel.class);
+				int id = new EmployeeDAO().save(employeesModel);
 				employeesModel.setId(id);
 				return new Gson().toJson(employeesModel);
 			}
@@ -50,8 +41,8 @@ public class EmployeeController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				EmployeesModel employeesModel = new GsonBuilder().create().fromJson(request.body(), EmployeesModel.class);
-				new EmployeesDAO().update(employeesModel);
+				EmployeeModel employeesModel = new GsonBuilder().create().fromJson(request.body(), EmployeeModel.class);
+				new EmployeeDAO().update(employeesModel);
 				return new Gson().toJson(employeesModel);
 			}
 		});
@@ -59,8 +50,8 @@ public class EmployeeController {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				EmployeesModel employeesModel = new GsonBuilder().create().fromJson(request.body(), EmployeesModel.class);
-				new EmployeesDAO().delete(employeesModel.getId());
+				EmployeeModel employeesModel = new GsonBuilder().create().fromJson(request.body(), EmployeeModel.class);
+				new EmployeeDAO().delete(employeesModel.getId());
 				return new Gson().toJson(employeesModel.getId());
 			}
 		});
