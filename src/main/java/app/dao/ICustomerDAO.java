@@ -4,7 +4,7 @@ import java.util.List;
 
 import app.model.CustomerModel;
 
-public interface ICustomeDAO extends GenericDAO<CustomerModel>{
+public interface ICustomerDAO extends GenericDAO<CustomerModel>{
 	List<CustomerModel> findAll();
 	CustomerModel findOne(Integer id);
 	CustomerModel findByName(String name);

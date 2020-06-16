@@ -1,6 +1,0 @@
-app\mapper\RowMapper.class
-app\dao\GenericDAO.class
-app\dao\impl\AbstractDAO.class
-app\Application.class
-app\model\AbstactModel.class
-app\utils\ViewUtil.class

@@ -2,11 +2,11 @@ package app.dao.impl;
 
 import java.util.List;
 
-import app.dao.ICustomeDAO;
+import app.dao.ICustomerDAO;
 import app.mapper.CustomerMapper;
 import app.model.CustomerModel;
 
-public class CustomerDAO extends AbstractDAO<CustomerModel> implements ICustomeDAO{
+public class CustomerDAO extends AbstractDAO<CustomerModel> implements ICustomerDAO{
 
 	@Override
 	public List<CustomerModel> findAll() {
