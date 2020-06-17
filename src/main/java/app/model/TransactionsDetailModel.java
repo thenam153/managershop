@@ -2,7 +2,7 @@ package app.model;
 
 import java.sql.Timestamp;
 
-public class TransactionsDetailModel extends AbstactModel<TransactionsDetailModel>{
+public class TransactionsDetailModel extends AbstractModel<TransactionsDetailModel>{
 	private Integer idTransaction;
 	private Integer idProduct;
 	private Integer quantily;

@@ -3,7 +3,7 @@ package app.model;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-public class AbstactModel<T> {
+public class AbstractModel<T> {
 	public Timestamp getCreatedDate() {
 		return createdDate;
 	}

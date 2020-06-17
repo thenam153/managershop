@@ -2,7 +2,7 @@ package app.model;
 
 import java.sql.Timestamp;
 
-public class CustomerModel extends AbstactModel<CustomerModel>{
+public class CustomerModel extends AbstractModel<CustomerModel>{
 	private String name;
 	private String dateofbirth;
 	private String phone;

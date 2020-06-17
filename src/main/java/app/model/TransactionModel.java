@@ -2,7 +2,7 @@ package app.model;
 
 import java.sql.Timestamp;
 
-public class TransactionModel extends AbstactModel<TransactionModel>{
+public class TransactionModel extends AbstractModel<TransactionModel>{
 	private Integer idCustomer;
 	private Integer idEmployee;
 	private Timestamp createat;
